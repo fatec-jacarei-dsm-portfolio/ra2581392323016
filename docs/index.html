@@ -1,49 +1,443 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Guilherme Teixeira Cardoso</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio — Guilherme Teixeira</title>
+  <style>
+    :root {
+      --bg: #071014;
+      --card: #1b0b0b;
+      --accent: #00e6a8;
+      --muted: #8aa4ac;
+      --glass: rgba(254, 255, 255, 0.03);
+      --radius: 13px;
+      --maxw: 1100px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html, body {
+      height: 100%;
+    }
+    
+    body {
+      margin: 0;
+      background: radial-gradient(1199px 600px at 10% 10%, rgba(0, 230, 168, 0.04), transparent),
+                 radial-gradient(899px 400px at 90% 90%, rgba(0, 120, 255, 0.03), transparent),
+                 var(--bg);
+      color: #e5f1ef;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 48px 32px;
+      min-height: 100vh;
+    }
+    
+    .wrap {
+      width: 100vw;
+      max-width: 1100px;
+      min-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      gap: 32px;
+      grid-template-columns: 340px 1fr;
+      align-items: flex-start;
+    }
+    
+    .card {
+      background: linear-gradient(179deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      border-radius: var(--radius);
+      padding: 15px;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 20px;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+    
+    .profile {
+      position: relative;
+      top: -34px;
+    }
+    
+    .avatar {
+      width: 100%;
+      height: 235px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(134deg, rgba(0, 230, 168, 0.06), rgba(0, 120, 255, 0.03));
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+    
+    .avatar svg {
+      width: 119px;
+      height: 120px;
+      opacity: 0.95;
+    }
+    
+    h1, h2, h3 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: 0.6px;
+    }
+    
+    .role {
+      color: var(--muted);
+      margin-top: 5px;
+      font-size: 13px;
+      min-height: 20px;
+    }
+    
+    .contact {
+      margin-top: 11px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    
+    .contact a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .contact a:hover {
+      color: #00ffbb;
+      text-decoration: underline;
+    }
+    
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 14px;
+    }
+    
+    .skill {
+      background: var(--glass);
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--muted);
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    
+    .skill:hover {
+      background: rgba(0, 230, 168, 0.1);
+      color: #00e6a8;
+    }
+    
+    .main {
+      display: flex;
+      flex-direction: column;
+      gap: 17px;
+    }
+    
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 15px;
+    }
+    
+    .section-title h2 {
+      margin: 0;
+      font-size: 16px;
+    }
+    
+    .pill {
+      background: linear-gradient(89deg, rgba(0, 230, 168, 0.12), rgba(0, 120, 255, 0.06));
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--accent);
+    }
+    
+    .about {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    
+    .experience-item {
+      padding: 11px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), transparent);
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      margin-bottom: 10px;
+      transition: transform 0.2s ease;
+    }
+    
+    .experience-item:hover {
+      transform: translateX(5px);
+    }
+    
+    .company {
+      font-weight: 600;
+      color: var(--accent);
+    }
+    
+    .period {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 5px 0;
+    }
+    
+    .edu {
+      display: flex;
+      gap: 11px;
+      flex-direction: column;
+    }
+    
+    footer {
+      opacity: 0.8;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    
+    @media (max-width: 1200px) {
+      .wrap {
+        max-width: 100vw;
+        min-width: 0;
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      body {
+        padding: 24px 8px;
+      }
+      .card {
+        margin-top: 24px;
+      }
+      .profile {
+        position: relative;
+        top: 0;
+      }
+    }
+    
+    .glow {
+      position: relative;
+    }
+    
+    .glow::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: inherit;
+      filter: blur(18px);
+      opacity: 0;
+      transition: opacity 0.35s;
+      z-index: -1;
+    }
+    
+    .card:hover .glow::after {
+      opacity: 0.3;
+      background: linear-gradient(90deg, rgba(0, 230, 168, 0.07), rgba(0, 120, 255, 0.04));
+    }
+    
+    .fade-up {
+      transform: translateY(13px);
+      opacity: 0;
+      animation: fadeUp 0.7s forwards;
+    }
+    
+    .delay-2 {
+      animation-delay: 0.06s;
+    }
+    
+    .delay-3 {
+      animation-delay: 0.12s;
+    }
+    
+    .delay-4 {
+      animation-delay: 0.18s;
+    }
+    
+    @keyframes fadeUp {
+      to {
+        transform: none;
+        opacity: 1;
+      }
+    }
+    
+    .toolbar {
+      display: flex;
+      gap: 9px;
+      align-items: center;
+    }
+    
+    .btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 13px;
+      transition: all 0.2s ease;
+    }
+    
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .btn.primary {
+      border-color: rgba(0, 230, 168, 0.25);
+      color: var(--accent);
+    }
+    
+    .btn.primary:hover {
+      background: rgba(0, 230, 168, 0.1);
+    }
+    
+    .projects {
+      display: grid;
+      gap: 13px;
+    }
+    
+    .project {
+      display: flex;
+      gap: 11px;
+      align-items: center;
+      padding: 12px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), transparent);
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      transition: transform 0.2s ease;
+    }
+    
+    .project:hover {
+      transform: translateX(5px);
+    }
+    
+    .project img {
+      width: 47px;
+      height: 48px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #111;
+    }
+    
+    .project a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.2s ease;
+    }
+    
+    .project a:hover {
+      color: #00ffbb;
+      text-decoration: underline;
+    }
+    
+    .project div {
+      flex: 1;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    
+    ul {
+      color: var(--muted);
+      padding-left: 20px;
+      margin: 0;
+    }
+    
+    li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <aside class="sidebar">
-      <img src="assets/img/perfil.jpeg" alt="Foto" class="foto-perfil" />
+  <div class="wrap" style="align-items:start;">
+    <aside class="card profile glow fade-up delay-2">
+      <div class="avatar">
+          <img src="images/img-perfil.jpg" alt="Avatar" style="width:100%; height:100%; object-fit:cover; border-radius:11px;"> 
+          <defs>
+            <linearGradient id="g" x1="0" x2="1">
+              <stop offset="0" stop-color="#00e6a8" stop-opacity="0.9"/>
+              <stop offset="1" stop-color="#0078ff" stop-opacity="0.9"/>
+            </linearGradient>
+          </defs>
+          <rect width="119" height="120" rx="18" fill="#071014"/>
+          <circle cx="59" cy="44" r="20" fill="url(#g)" />
+          <rect x="23" y="74" width="72" height="20" rx="8" fill="#0b1220" stroke="#072029"/>
+        </svg>
+      </div>
       <h1>Guilherme Teixeira</h1>
-      <p>Estudante DSM - FATEC Jacareí</p>
-      <nav>
-        <ul>
-        </ul>
-      </nav>
+      <div class="role" id="typing-effect">Estudante — Desenvolvimento de Software Multiplataforma</div>
+      <div class="contact">
+        <div>📍 Guararema - SP</div>
+        <div>📱 <a href="tel:+5511968584737">(11) 96858-4737</a></div>
+        <div>✉️ <a href="mailto:GuilhermeCardosot2@gmail.com">GuilhermeCardosot2@gmail.com</a></div>
+        <div>GitHub: <a href="https://github.com/GuilhermeCardoso-1" target="_blank">GuilhermeCardoso-1</a></div>
+      </div>
+      <div class="skills" aria-hidden>
+        <span class="skill">JavaScript</span>
+        <span class="skill">TypeScript</span>
+        <span class="skill">C++</span>
+        <span class="skill">Python</span>
+        <span class="skill">SQL</span>
+        <span class="skill">Git</span>
+        <span class="skill">Sistemas Embarcados</span>
+        <span class="skill">Redes / Pentest</span>
+      </div>
+      <div style="margin-top:15px">
+        <button class="btn primary" onclick="scrollToSection('contact')">Entrar em contato</button>
+        <button class="btn" onclick="window.print()">Imprimir</button>
+      </div>
     </aside>
-    <main class="conteudo">
-      <section id="apresentacao">
-        <h2>Apresentação</h2>
-        <p>Sou estudante de Desenvolvimento de Software Multiplataforma pela FATEC Jacareí. Tenho grande interesse por sistemas embarcados, eletrônica, automação e segurança da informação. Minha trajetória combina conhecimento técnico, curiosidade prática e dedicação a projetos inovadores.</p>
+    <main class="main" style="align-self:start;">
+      <section class="card fade-up delay-3" style="margin-top:0;">
+        <div class="section-title">
+          <h2>Sobre mim</h2>
+          <span class="pill">Objetivo</span>
+        </div>
+        <p class="about">Como estudante de Tecnologia da Informação e entusiasta de sistemas embarcados e cibersegurança. Busco oportunidade para aplicar e expandir conhecimentos técnicos e acadêmicos, desenvolver habilidades práticas e contribuir para projetos tecnológicos inovadores.</p>
       </section>
+      <section class="card fade-up delay-4">
+        <div class="section-title">
+          <h2>Projetos no GitHub</h2>
+        </div>
+        <div class="projects">
+          <div class="project">
+            <img src="images/img-telegraph.jpg" alt="Telegraph" />
+            <div>
+              <a href="https://github.com/RafaelSM21/telegraph" target="_blank">Telegraph</a>
+              <div>Projeto IoT para enviar e traduzir código Morse via MQTT e backend em TypeScript.</div>
+            </div>
+          </div>
+          <div class="project">
+            <img src="images/img-globe.jpg" alt="Globe" />
+            <div>
+              <a href="https://github.com/candago-4/documentacao/blob/main/index.md" target="_blank">GPS Tracker</a>
+              <div>Sistema de rastreamento com ESP32, GPS NEO-6M, comunicação via MQTT e integração com React Native.</div>
+            </div>
+          </div>
+          </div>
 
-      <section id="projetos">
-        <h2>Projetos</h2>
-        <ul>
-          <li><strong>ESP32 GPS Tracker:</strong> Envio de coordenadas geográficas para PostgreSQL via MQTT.</li>
-          <li><strong>Morse com Arduino:</strong> Interpretação de código Morse via botões físicos.</li>
-        </ul>
+            </div>
+          </div>
+        </div>
       </section>
-
-      <section id="tecnologias">
-        <h2>Tecnologias</h2>
-        <ul>
-          <li>HTML5, CSS3, JavaScript, TypeScript</li>
-          <li>C++, Python, SQL</li>
-          <li>Git, GitHub, PostgreSQL</li>
-          <li>ESP32, ESP8266, Arduino</li>
-        </ul>
+        </div>
       </section>
     </main>
   </div>
-  <footer>
-    <p>&copy; 2025 Guilherme Teixeira Cardoso</p>
-  </footer>
 </body>
 </html>
